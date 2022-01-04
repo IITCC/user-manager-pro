@@ -29,6 +29,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
         with:
-          tag_name: 'v{version}'
-          release_name: 'v{version}'
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
