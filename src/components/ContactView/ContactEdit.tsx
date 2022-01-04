@@ -12,6 +12,8 @@ const ContactEdit = (props: Props) => {
 
   const [name, setName] = useState(contact!.name);
   const [number, setNumber] = useState(contact!.number);
+  const [last, setLast] = useState(contact!.last);
+  const [dob, setDob] = useState(contact!.dob);
 
   const handleSubmit = () => {
     store.updateContact(contact!.id, {
@@ -19,6 +21,8 @@ const ContactEdit = (props: Props) => {
       number,
       id: contact!.id,
       photo: contact!.photo,
+      last,
+      dob,
     });
   };
 
@@ -37,7 +41,17 @@ const ContactEdit = (props: Props) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="border-b w-full focus:outline-none leading-8"
-            placeholder="Name"
+            placeholder="First name"
+          />
+        </div>
+
+        <div className="flex gap-4 my-8 w-full items-center">
+          <MdPersonOutline size={28} className="opacity-[0.56]" />
+          <input
+            value={last}
+            onChange={(e) => setLast(e.target.value)}
+            className="border-b w-full focus:outline-none leading-8"
+            placeholder="Last name"
           />
         </div>
 
@@ -51,13 +65,23 @@ const ContactEdit = (props: Props) => {
           />
         </div>
 
+        <div className="flex gap-4 my-8 w-full items-center">
+          <MdPersonOutline size={28} className="opacity-[0.56]" />
+          <input
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            className="border-b w-full focus:outline-none leading-8"
+            placeholder="Date of birth"
+          />
+        </div>
+
         <div className="">
           <button
             type="submit"
-            disabled={name === contact?.name && number === contact?.number}
+            disabled={name === contact?.name && number === contact?.number && last === contact?.last && dob === contact?.dob}
             className="h-10 bg-[#1a73e8] text-white px-8 rounded disabled:grayscale"
           >
-            Edit
+            Update
           </button>
         </div>
       </form>

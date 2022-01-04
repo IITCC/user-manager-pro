@@ -12,16 +12,15 @@ const Header = (props: Props) => {
       <div className="flex flex-col sm:flex-row sm:items-center pr-4 justify-between max-w-[1440px] m-auto">
         <Link to={"/"} className="flex px-8 py-3 items-center gap-3">
           <img src={Logo} className="w-10 h-10" />
-          <span className="text-[#5f6368] text-xl">Phonebook</span>
+          <span className="text-[#5f6368] text-xl">User Manager PRO</span>
         </Link>
-        <SearchBox />
         <button
           onClick={() => navigate("/add")}
           className="px-2 sm:pr-4 py-1 border rounded-full items-center hidden md:flex gap-2 shadow hover:shadow-md"
         >
           <img src={AddIcon} className="w-9 h-9 rounded-full" />
           <span className="font-medium text-sm lg:text-base hidden sm:block">
-            Create contact
+            Create user
           </span>
         </button>
       </div>

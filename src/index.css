@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
+  margin: 20px;
   font-family: "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

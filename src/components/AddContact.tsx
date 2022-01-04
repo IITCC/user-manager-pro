@@ -10,15 +10,17 @@ const AddContact = (props: Props) => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const [last, setLast] = useState("");
+  const [dob, setDob] = useState("");
 
   const handleSubmit = () => {
-    store.addContact({ name, number });
+    store.addContact({ name, number, last, dob });
     navigate("/");
   };
 
   return (
     <div className="p-8">
-      <h1 className="mb-6 text-lg font-medium">Create Contact</h1>
+      <h1 className="mb-6 text-lg font-medium">Create User</h1>
       <div className="flex justify-between flex-col sm:flex-row">
         <div className="flex gap-8 flex-col sm:flex-row">
           <div className="flex gap-8">
@@ -53,7 +55,17 @@ const AddContact = (props: Props) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="border-b w-full focus:outline-none leading-8"
-              placeholder="Name"
+              placeholder="First name"
+            />
+          </div>
+
+          <div className="flex gap-4 my-8 w-full items-center">
+            <MdPersonOutline size={28} className="opacity-[0.56]" />
+            <input
+              value={last}
+              onChange={(e) => setLast(e.target.value)}
+              className="border-b w-full focus:outline-none leading-8"
+              placeholder="Last name"
             />
           </div>
 
@@ -63,7 +75,17 @@ const AddContact = (props: Props) => {
               value={number}
               onChange={(e) => setNumber(e.target.value)}
               className="border-b w-full focus:outline-none leading-8"
-              placeholder="Phone number"
+              placeholder="Email"
+            />
+          </div>
+
+          <div className="flex gap-4 my-8 w-full items-center">
+            <MdPersonOutline size={28} className="opacity-[0.56]" />
+            <input
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              className="border-b w-full focus:outline-none leading-8"
+              placeholder="Date of birth"
             />
           </div>
 

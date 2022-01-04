@@ -10,12 +10,15 @@ import {
 import toast from "react-hot-toast";
 import API from "../api"
 import { resolvePath } from "react-router";
+import { MdLastPage } from "react-icons/md";
 
 interface Contact {
   name: string;
   number: string;
   id: string;
   photo: string;
+  last: string;
+  dob: string;
 }
 
 const saveStore = (_this: any) => {
@@ -49,10 +52,14 @@ class Store {
       saveStore(this);
   }
 
-   loadContacts = () => {
+   loadContacts = (force: boolean) => {
 
-    if(this.contacts.length > 0) {
-      return;
+    if(!force) {
+      if(this.contacts.length > 0) {
+        return;
+     }
+    } else {
+      this.contacts = [];
     }
 
     API.get(`users`)
@@ -62,35 +69,52 @@ class Store {
             this.contacts.push({
             name: res.data[i].firstName,
             number: res.data[i].email,
-            photo: `https://ui-avatars.com/api/?name=${res.data[i].email}&length=1&background=random&size=262`,
             id: res.data[i].id,
+            photo: `https://ui-avatars.com/api/?name=${res.data[i].email}&length=1&background=random&size=262`,
+            last: res.data[i].lastName,
+            dob: res.data[i].dateOfBirth,
             });
           }
         }
       });
    }
 
-  addContact = ({ name, number }: { name: string; number: string }) => {
-    this.contacts.push({
-      name,
-      number,
-      photo: `https://ui-avatars.com/api/?name=${name}&length=1&background=random&size=262`,
-      id: `${this.contacts.length + 1}`,
-    });
+  addContact = ({ name, number, last, dob }: { name: string; number: string; last: string, dob: string }) => {
+
+     API.post(`users`, { "firstName": name, "lastName": last, "email" : number, "dateOfBirth": dob})
+      .then(res => {
+        this.loadContacts(true);
+        console.log(res);
+        console.log(res.data);
+      });
+
     toast.success("Contact added");
   };
 
   removeContact = (id: string) => {
-    this.contacts = this.contacts.filter((e) => e.id !== id);
+
+      API.delete(`users/${id}`)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+    this.contacts = this.contacts.filter((e) => e.id != id);
     toast.success("Contact deleted");
   };
 
   findContact = (id: string) => {
-    return this.contacts.find((e) => e.id === id);
+    debugger;
+    return this.contacts.find((e) => e.id == id);
   };
 
   updateContact = (id: string, payload: Contact) => {
-    // Find index
+
+      API.put(`users/${id}`, { "id": id, "firstName": payload.name, "lastName": payload.last, "email" : payload.number, "dateOfBirth": payload.dob})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+    
     let index = this.contacts.findIndex((e) => e.id === id);
     this.contacts[index] = payload;
     toast.success("Contact updated");

@@ -15,7 +15,7 @@ import AddContact from "./components/AddContact";
 const App = () => {
 
   useEffect(() => {
-    store.loadContacts();
+    store.loadContacts(false);
   }, []);
 
   return (
