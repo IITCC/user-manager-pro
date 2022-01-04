@@ -1,0 +1,24 @@
+name: Release and deply to dev 
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - 'package.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Bump version and push tag
+        uses: TriPSs/conventional-changelog-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          git-message: 'user-manager-pro(release): {version}'
+          tag-prefix: ''
+          output-file: 'false'
