@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.USER_TOKEN }}
 
       - name: Bump version and push tag
         uses: TriPSs/conventional-changelog-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.USER_TOKEN }}
           git-message: 'user-manager-pro(release): {version}'
           tag-prefix: ''
           output-file: 'false'
