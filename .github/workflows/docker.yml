@@ -1,4 +1,4 @@
-name: CI
+name: Build image and deploy
 
 on:
   push:
@@ -37,4 +37,11 @@ jobs:
           context: .
           push: true
           file: Dockerfile
-          tags: isurabuy/user-manager-pro-app:${{github.run_id}}
+          tags: isurabuy/user-manager-pro-app:${{github.run_id}} 
+      - 
+        name: Run the version update script
+        env:
+          TOKEN: ${{secrets.USER_PAT}}
+          RELEASE_ID: ${{github.run_id}}
+        run: bash update_version.sh iit-bot $TOKEN $GITHUB_WORKSPACE $RELEASE_ID
+        id: version_bump_fe
