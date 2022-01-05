@@ -15,10 +15,10 @@ jobs:
         with:
           token: ${{ secrets.USER_TOKEN }}
 
-      - name: Bump version and push tag
+      - name: Conventional Changelog Action
+        id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.USER_TOKEN }}
           git-message: 'user-manager-pro(release): {version}'
-          tag-prefix: ''
-          output-file: 'false'
+          output-file: "false"
