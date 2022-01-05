@@ -13,11 +13,11 @@ git clone https://"${GIT_USERNAME}":"${GIT_TOKEN}"@github.com/IITCC/helm-user-mg
 git -C helm_user_mgt config user.email "${GIT_EMAIL}"
 git -C helm_user_mgt config user.name "${GIT_USERNAME}"
 
-TAG_LINE=$(grep -w 'tag' "${WORK_DIR}"/helm_user_mgt/helm-user-mgt/values.yaml | sed 's/ *//')
-sed -i 's|'"${TAG_LINE}"'|tag: '"'${TAG}'"'|' "${WORK_DIR}"/helm_user_mgt/helm-user-mgt/values.yaml
+TAG_LINE=$(grep -w 'tag' "${WORK_DIR}"/helm_user_mgt/values.yaml | sed 's/ *//')
+sed -i 's|'"${TAG_LINE}"'|tag: '"'${TAG}'"'|' "${WORK_DIR}"/helm_user_mgt/values.yaml
 
 # Push new values.yaml.
-git -C helm_user_mgt add "${WORK_DIR}"/helm_user_mgt/helm-user-mgt/values.yaml
+git -C helm_user_mgt add "${WORK_DIR}"/helm_user_mgt/values.yaml
 git -C helm_user_mgt commit -m "Update user mgt app version to - ${TAG}"
 git -C helm_user_mgt push origin main
 
