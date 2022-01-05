@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths-ignore:
     - 'package.json'
+    - 'CHANGELOG.md'
 
 jobs:
   build:
@@ -13,12 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.USER_TOKEN }}
+          token: ${{ secrets.USER_PAT }}
 
       - name: Conventional Changelog Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3
         with:
-          github-token: ${{ secrets.USER_TOKEN }}
-          git-message: 'user-manager-pro(release): {version}'
-          output-file: "false"
+          github-token: ${{ secrets.USER_PAT }}
+          git-message: 'user-manager-pro release'
