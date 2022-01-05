@@ -37,4 +37,4 @@ jobs:
           context: .
           push: true
           file: Dockerfile
-          tags: isurabuy/user-manager-pro-app:$GITHUB_SHA
+          tags: isurabuy/user-manager-pro-app:"$GITHUB_SHA"
