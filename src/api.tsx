@@ -2,5 +2,5 @@ import axios from "axios";
 
 
 export default axios.create({
-  baseURL: `${import.meta.env.REACT_APP_API_ENDPOINT}`
+  baseURL: 'http://20.40.243.96/'
 });
