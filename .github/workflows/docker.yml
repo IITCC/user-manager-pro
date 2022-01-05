@@ -38,4 +38,4 @@ jobs:
           context: .
           push: true
           file: Dockerfile
-          tags: isurabuy/user-manager-pro-app:latest
+          tags: isurabuy/user-manager-pro-app:${{github.run_id}}
